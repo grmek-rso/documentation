@@ -1,0 +1,60 @@
+New project:
+  - New GitHub repository:
+    - Name: <service-name>.
+    - Add .gitignore file.
+  - IntelliJ:
+    - New Maven project:
+      - GroupId: com.grmek.rso.
+      - ArtifactId: <service-name>.
+      - Version: 1.0.0-SNAPSHOT.
+      - Project name: <service-name>.
+    - Add properties, dependencyManagement, dependencies and build section to
+      the pom.xml file.
+    - Add configuration:
+      - New (+).
+      - Application.
+      - Main class: com.kumuluz.ee.EeApplication.
+    - Add source files (package: com.grmek.rso.<servicename>).
+  - Add Dockerfile.
+  - Setup Travis CI:
+    - Add .travis.yml file.
+    - Add environment variables DOCKER_USERNAME and DOCKER_PASSWORD on the
+      Travis CI's webpage (repository -> more options -> settings).
+  - Setup configuration managment:
+    - Add config.yml file to the resources.
+    - Run Etcd server and add some values with the Etcd viewer.
+
+Maven:
+  - Build: "mvn clean package -U".
+
+Docker:
+  - Build: "docker build -t grmek/<service-name>:1.0.0-SNAPSHOT .".
+  - Push: "docker push grmek/<service-name>:1.0.0-SNAPSHOT".
+  - Pull: "docker pull grmek/<service-name>:1.0.0-SNAPSHOT".
+  - Run: "docker run -d -p <port>:8080 -e <var>=<value>
+    grmek/<service-name>:1.0.0-SNAPSHOT".
+  - Get ip: "docker-machine ip default".
+  - Access service at: "<ip>:<port>/<api>".
+  - List images: "docker images".
+  - Remove image: "docker rmi <image>".
+  - List containers: "docker ps".
+  - Kill container: "docker kill <container>".
+
+Etcd:
+  - Server: "docker run -d -p 2379:2379 \
+    --name etcd \
+    --volume=/tmp/etcd-data:/etcd-data \
+    quay.io/coreos/etcd:latest \
+    /usr/local/bin/etcd \
+    --name my-etcd-1 \
+    --data-dir /etcd-data \
+    --listen-client-urls http://0.0.0.0:2379 \
+    --advertise-client-urls http://0.0.0.0:2379 \
+    --listen-peer-urls http://0.0.0.0:2380 \
+    --initial-advertise-peer-urls http://0.0.0.0:2380 \
+    --initial-cluster my-etcd-1=http://0.0.0.0:2380 \
+    --initial-cluster-token my-etcd-token \
+    --initial-cluster-state new \
+    --auto-compaction-retention 1 \
+    -cors="*"".
+  - Viewer: "docker run -d -p 8080:8080 nikfoundas/etcd-viewer".
