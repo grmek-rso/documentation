@@ -1,0 +1,27 @@
+version: "3"
+services:
+  image-managing:
+    image: grmek/image-managing:1.0.0-SNAPSHOT-4.1
+    ports:
+      - 8080:8080
+    environment:
+      KUMULUZEE_CONFIG_ETCD_HOSTS: http://etcd:2379
+    depends_on:
+      - etcd
+  etcd:
+    image: quay.io/coreos/etcd:latest
+    ports:
+      - 2379:2379
+    command: >
+      /usr/local/bin/etcd
+      --name etcd-node-0
+      --advertise-client-urls http://etcd:2379
+      --listen-client-urls http://0.0.0.0:2379
+      --initial-advertise-peer-urls http://etcd:2380
+      --listen-peer-urls http://0.0.0.0:2380
+      --initial-cluster etcd-node-0=http://etcd:2380
+      -cors="*"
+  etcd-viewer:
+    image: nikfoundas/etcd-viewer:latest
+    ports:
+      - 8081:8080
