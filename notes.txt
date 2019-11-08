@@ -31,7 +31,7 @@ Docker:
   - Build: "docker build -t grmek/<service-name>:1.0.0-SNAPSHOT .".
   - Push: "docker push grmek/<service-name>:1.0.0-SNAPSHOT".
   - Pull: "docker pull grmek/<service-name>:1.0.0-SNAPSHOT".
-  - Run: "docker run -d -p <port>:8080 -e <var>=<value>
+  - Run: "docker run -d -p <port>:8080 -e <var>=<value> \
     grmek/<service-name>:1.0.0-SNAPSHOT".
   - Get ip: "docker-machine ip default".
   - Access service at: "<ip>:<port>/<api>".
@@ -39,6 +39,10 @@ Docker:
   - Remove image: "docker rmi <image>".
   - List containers: "docker ps".
   - Kill container: "docker kill <container>".
+  - Remove container: "docker rm <container>".
+  - Compose:
+    - Start containers: "docker-compose up -d".
+    - Stop and remove containers: "docker-compose down".
 
 Etcd:
   - Server: "docker run -d -p 2379:2379 \
@@ -46,15 +50,17 @@ Etcd:
     --volume=/tmp/etcd-data:/etcd-data \
     quay.io/coreos/etcd:latest \
     /usr/local/bin/etcd \
-    --name my-etcd-1 \
+    --name etcd-node-0 \
     --data-dir /etcd-data \
     --listen-client-urls http://0.0.0.0:2379 \
     --advertise-client-urls http://0.0.0.0:2379 \
     --listen-peer-urls http://0.0.0.0:2380 \
     --initial-advertise-peer-urls http://0.0.0.0:2380 \
-    --initial-cluster my-etcd-1=http://0.0.0.0:2380 \
-    --initial-cluster-token my-etcd-token \
-    --initial-cluster-state new \
-    --auto-compaction-retention 1 \
+    --initial-cluster etcd-node-0=http://0.0.0.0:2380 \
     -cors="*"".
-  - Viewer: "docker run -d -p 8080:8080 nikfoundas/etcd-viewer".
+  - Viewer: "docker run -d -p 8081:8080 --name etcd-viewer \
+    nikfoundas/etcd-viewer".
+  - Config path: "/environments/dev/services/<service-name>/1.0.0/config/...".
+
+Kubernetes:
+  - Deployment: "kubectl apply -f <file-name>".
