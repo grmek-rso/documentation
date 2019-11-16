@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: etcd
-          image: quay.io/coreos/etcd:latest
+          image: quay.io/coreos/etcd:v3.2.28
+          imagePullPolicy: Always
           command:
             - /usr/local/bin/etcd
             - --name
