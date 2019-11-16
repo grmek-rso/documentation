@@ -18,8 +18,12 @@ New project:
   - Add Dockerfile.
   - Setup Travis CI:
     - Add .travis.yml file.
-    - Add environment variables DOCKER_USERNAME and DOCKER_PASSWORD on the
-      Travis CI's webpage (repository -> more options -> settings).
+    - Add environment variables on the Travis CI's webpage (repository ->
+      more options -> settings):
+      - DOCKER_USERNAME.
+      - DOCKER_PASSWORD.
+      - GCP_KEY (get the key for the GCP service account, remove all new line
+        characters, add single quotes around the resulting line).
   - Setup configuration managment:
     - Add config.yml file to the resources.
     - Run Etcd server and add some values with the Etcd viewer.
@@ -48,7 +52,7 @@ Etcd:
   - Server: "docker run -d -p 2379:2379 \
     --name etcd \
     --volume=/tmp/etcd-data:/etcd-data \
-    quay.io/coreos/etcd:latest \
+    quay.io/coreos/etcd:v3.2.28 \
     /usr/local/bin/etcd \
     --name etcd-node-0 \
     --data-dir /etcd-data \
@@ -59,8 +63,16 @@ Etcd:
     --initial-cluster etcd-node-0=http://0.0.0.0:2380 \
     -cors="*"".
   - Viewer: "docker run -d -p 8081:8080 --name etcd-viewer \
-    nikfoundas/etcd-viewer".
+    nikfoundas/etcd-viewer:latest".
   - Config path: "/environments/dev/services/<service-name>/1.0.0/config/...".
 
 Kubernetes:
   - Deployment: "kubectl apply -f <file-name>".
+  - Port forwarding: "kubectl port-forward <pod> <port>:<pod_port>".
+    This is useful for testing Node Port services. After port forwarding, the
+    pod will be available at localhost:<port>.
+
+Google Cloud Platform:
+  - Get the key for the service account: APIs & Services -> Credentials ->
+    Create credentials -> Service account key -> Compute Engine default service
+    account, JSON -> Create.
