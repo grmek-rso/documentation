@@ -25,7 +25,7 @@ New project:
       - GCP_KEY (get the key for the GCP service account, remove all new line
         characters, add single quotes around the resulting line).
   - Setup configuration managment:
-    - Add config.yml file to the resources.
+    - Add config.yaml file to the resources.
     - Run Etcd server and add some values with the Etcd viewer.
 
 Maven:
@@ -76,3 +76,6 @@ Google Cloud Platform:
   - Get the key for the service account: APIs & Services -> Credentials ->
     Create credentials -> Service account key -> Compute Engine default service
     account, JSON -> Create.
+  - Configuring permissions: IAM & admin -> IAM -> Change member's project role
+    from Editor to Owner (member can be determined with "gcloud info" at the
+    Account section).
