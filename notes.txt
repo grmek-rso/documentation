@@ -80,6 +80,8 @@ Google Cloud Platform:
   - Configuring permissions: IAM & admin -> IAM -> Change member's project role
     from Editor to Owner (member can be determined with "gcloud info" at the
     Account section).
+  - Setup DB: SQL -> Create instance -> MySQL -> Instance ID: mysql-db,
+    Connectivity -> Enable Private IP and disable Public IP, Create.
 
 Logit:
   - Setup:
