@@ -82,6 +82,10 @@ Google Cloud Platform:
     Account section).
   - Setup DB: SQL -> Create instance -> MySQL -> Instance ID: mysql-db,
     Connectivity -> Enable Private IP and disable Public IP, Create.
+  - Setup Storage: Storage -> Create bucket -> Name: grmek-rso-storage-bucket,
+    Region: us-central1 (lowa), Access control: Fine-grained, Encryption:
+    Google-managed key, Create. Permissions -> Add members -> New members:
+    allUsers, Select a role: Storage - Storage Object Viewer, Save.
 
 Logit:
   - Setup:
