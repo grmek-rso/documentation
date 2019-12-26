@@ -13,3 +13,15 @@ spec:
             backend:
               serviceName: image-managing
               servicePort: 8080
+          - path: /image-managing(/|$)(.*)
+            backend:
+              serviceName: commenting
+              servicePort: 8081
+          - path: /image-managing(/|$)(.*)
+            backend:
+              serviceName: sharing
+              servicePort: 8082
+          - path: /image-managing(/|$)(.*)
+            backend:
+              serviceName: image-processing
+              servicePort: 8083
