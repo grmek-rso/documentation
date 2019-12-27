@@ -16,6 +16,22 @@ spec:
         - name: image-managing
           image: grmek/image-managing:1.0.0-SNAPSHOT-DEV
           imagePullPolicy: Always
+          env:
+            - name: CONFIGURATION_PROPERTIES_GCP_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: gcp-key
+                  key: gcp-key
+            - name: KUMULUZEE_STREAMING_KAFKA_PRODUCER_SASL_JAAS_CONFIG
+              valueFrom:
+                secretKeyRef:
+                  name: sasl-jaas-config
+                  key: sasl-jaas-config
+            - name: KUMULUZEE_STREAMING_KAFKA_CONSUMER_SASL_JAAS_CONFIG
+              valueFrom:
+                secretKeyRef:
+                  name: sasl-jaas-config
+                  key: sasl-jaas-config
           ports:
             - containerPort: 8080
               name: server

@@ -16,6 +16,17 @@ spec:
         - name: image-processing
           image: grmek/image-processing:1.0.0-SNAPSHOT-DEV
           imagePullPolicy: Always
+          env:
+            - name: KUMULUZEE_STREAMING_KAFKA_PRODUCER_SASL_JAAS_CONFIG
+              valueFrom:
+                secretKeyRef:
+                  name: sasl-jaas-config
+                  key: sasl-jaas-config
+            - name: KUMULUZEE_STREAMING_KAFKA_CONSUMER_SASL_JAAS_CONFIG
+              valueFrom:
+                secretKeyRef:
+                  name: sasl-jaas-config
+                  key: sasl-jaas-config
           ports:
             - containerPort: 8083
               name: server
