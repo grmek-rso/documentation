@@ -18,18 +18,21 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8082
-              name: server
+              name: rest-server
+              protocol: TCP
+            - containerPort: 8182
+              name: grpc-server
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /health/live
-              port: server
+              port: rest-server
             initialDelaySeconds: 20
             periodSeconds: 3
           readinessProbe:
             httpGet:
               path: /health/ready
-              port: server
+              port: rest-server
             initialDelaySeconds: 20
             periodSeconds: 3
 ---
@@ -43,6 +46,11 @@ spec:
   ports:
     - port: 8082
       protocol: TCP
-      targetPort: server
+      targetPort: rest-server
+      name: sharing-rest-server
+    - port: 8182
+      protocol: TCP
+      targetPort: grpc-server
+      name: sharing-grpc-server
   selector:
     app: sharing
