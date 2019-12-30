@@ -54,3 +54,21 @@ spec:
       name: sharing-grpc-server
   selector:
     app: sharing
+---
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: sharing
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: sharing-deployment
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 60
+status:
+  currentReplicas: 1
+  desiredReplicas: 1
+  currentCPUUtilizationPercentage: 0
