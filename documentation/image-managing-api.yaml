@@ -1,0 +1,249 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: image-managing
+paths:
+  /users:
+    post:
+      tags:
+      - users
+      summary: Add new user
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+    get:
+      tags:
+      - users
+      summary: Get all users
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+  /users/{userId}:
+    get:
+      tags:
+      - users
+      summary: Get the user
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: userId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+    delete:
+      tags:
+      - users
+      summary: Delete the user
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: userId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+  /users/{userId}/albums:
+    post:
+      tags:
+      - albums
+      summary: Add new album
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: userId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+    get:
+      tags:
+      - albums
+      summary: Get all albums
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: userId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+  /users/{userId}/albums/{albumId}:
+    get:
+      tags:
+      - albums
+      summary: Get the album
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: userId
+          type: integer
+          required: true
+        - in: path
+          name: albumId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+    delete:
+      tags:
+      - albums
+      summary: Delete the album
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: userId
+          type: integer
+          required: true
+        - in: path
+          name: albumId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+  /users/{userId}/albums/{albumId}/images:
+    post:
+      tags:
+      - images
+      summary: Add new image
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: userId
+          type: integer
+          required: true
+        - in: path
+          name: albumId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+    get:
+      tags:
+      - images
+      summary: Get all images
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: userId
+          type: integer
+          required: true
+        - in: path
+          name: albumId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+  /users/{userId}/albums/{albumId}/images/{imageId}:
+    get:
+      tags:
+      - images
+      summary: Get the image
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: userId
+          type: integer
+          required: true
+        - in: path
+          name: albumId
+          type: integer
+          required: true
+        - in: path
+          name: imageId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+    delete:
+      tags:
+      - images
+      summary: Delete the image
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: userId
+          type: integer
+          required: true
+        - in: path
+          name: albumId
+          type: integer
+          required: true
+        - in: path
+          name: imageId
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden

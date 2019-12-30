@@ -1,0 +1,83 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: sharing
+paths:
+  /shared-albums:
+    post:
+      tags:
+      - shared-albums
+      summary: Add new shared album
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: query
+          name: shared-with-user
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+    get:
+      tags:
+      - shared-albums
+      summary: Get shared albums
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: query
+          name: shared-with-user
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+    delete:
+      tags:
+      - shared-albums
+      summary: Delete shared album
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: query
+          name: shared-with-user
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+  /users-with-access:
+    post:
+      tags:
+      - users-with-access
+      summary: Get users with access
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: query
+          name: user
+          type: integer
+          required: true
+        - in: query
+          name: album
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden

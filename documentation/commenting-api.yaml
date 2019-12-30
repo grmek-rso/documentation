@@ -1,0 +1,133 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: commenting
+paths:
+  /comments:
+    post:
+      tags:
+      - comments
+      summary: Add new comment
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: query
+          name: user
+          type: integer
+          required: true
+        - in: query
+          name: album
+          type: integer
+          required: true
+        - in: query
+          name: image
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+    get:
+      tags:
+      - comments
+      summary: Get comments
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: query
+          name: user
+          type: integer
+          required: true
+        - in: query
+          name: album
+          type: integer
+          required: true
+        - in: query
+          name: image
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+    delete:
+      tags:
+      - comments
+      summary: Delete the comment
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: query
+          name: id
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+  /comments/user-clean-up:
+    post:
+      tags:
+      - clean-up
+      summary: Delete comments for the user
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: query
+          name: user
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+  /comments/album-clean-up:
+    post:
+      tags:
+      - clean-up
+      summary: Delete comments for the album
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: query
+          name: album
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
+  /comments/image-clean-up:
+    post:
+      tags:
+      - clean-up
+      summary: Delete comments for the image
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: query
+          name: image
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Ok
+        403:
+          description: Forbidden
