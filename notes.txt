@@ -68,11 +68,10 @@ Etcd:
 
 Kubernetes:
   - Deployment: "kubectl apply -f <file-name>".
-  - Port forwarding: "kubectl port-forward <pod> <port>:<pod_port>".
-    This is useful for testing Node Port services. After port forwarding, the
-    pod will be available at localhost:<port>.
   - Create a secret: "kubectl create secret generic <secret-name> \
     --from-literal=<key>=<value>"
+  - Get log from deployment: "kubectl logs deployment/<deployment-name>".
+  - Get HPAs: "kubectl get hpa".
 
 Google Cloud Platform:
   - Setup kubectl: "https://cloud.google.com/kubernetes-engine/docs/quickstart".
